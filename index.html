@@ -18,57 +18,128 @@
       .table {
         display: grid;
         grid-template-columns: 50px 200px 200px 200px;
-        grid-template-rows: repeat(10, 30px);
+        grid-auto-rows: 30px;
         font-size: 15px;
         border: 1px solid black;
       }
-      .table > div {
+      .table div {
         border: 1px solid black;
         padding: 2px;
         box-sizing: border-box;
       }
+      .betTable {
+        display: grid;
+        grid-template-columns: 75px 400px 175px;
+        grid-template-rows: repeat(11, 35px);
+        font-size: 30px;
+        border: 1px solid black;
+      }
     </style>
-    <div class="table">
+    <div class="table" id="table">
       <div>名前</div>
       <div>特長</div>
       <div>弱点</div>
       <div>得意条件</div>
-      <div>黒</div>
+      <div>1番</div>
       <div>スピード、加速が速い</div>
       <div>スタミナが低い</div>
       <div>1200〜1400m</div>
-      <div>白</div>
+      <div>2番</div>
       <div>スタートダッシュ最強、前に行くほど強い</div>
       <div>せられると失速する</div>
       <div>少頭数、ハイペース</div>
-      <div>赤</div>
+      <div>3番</div>
       <div>後半の伸びが安定</div>
       <div>展開依存度が高い</div>
       <div>平均〜ハイペース</div>
-      <div>青</div>
+      <div>4番</div>
       <div>末脚最強、ハマると圧勝</div>
       <div>不発率が高い</div>
       <div>ハイペース、長い直線コース</div>
-      <div>黄</div>
+      <div>5番</div>
       <div>能力が全体的に高い</div>
       <div>突出した強みがない</div>
       <div>1600〜2000m</div>
-      <div>緑</div>
+      <div>6番</div>
       <div>スタミナ特化、消耗戦に強い</div>
       <div>スピード不足</div>
       <div>3000m以上</div>
-      <div>紫</div>
+      <div>7番</div>
       <div>馬場状況が悪いと強くなる</div>
       <div>良馬場では平凡</div>
       <div>重・不良馬場</div>
-      <div>オレンジ</div>
+      <div>8番</div>
       <div>ダートの時に速い</div>
       <div>芝はほぼ走らない</div>
       <div>ダート全般</div>
-      <div>ピンク</div>
+      <div>9番</div>
       <div>能力振れ幅が大きい</div>
       <div>安定性が低い</div>
       <div>調子がいいときだけ</div>
     </div>
+    <div class="betTable">
+      <div>種類</div>
+      <div>馬</div>
+      <div>金額</div>
+      <div class="repeat">
+        <select id="ticket">
+          <option value="win">単勝</option>
+          <option value="place">複勝</option>
+          <option value="quinella">馬連</option>
+          <option value="exacta">馬単</option>
+          <option value="wide">ワイド</option>
+          <option value="trio">三連複</option>
+          <option value="trifecta">三連単</option>
+        </select>
+        <div>
+          <span id="first">1着</span>
+          <select id="select1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <span id="second">2着</span>
+          <select id="select2">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <span id="third">2着</span>
+          <select id="select3">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+        <input id="bet" type="number" min="0" step="1">
+      </div>
+    </div>
+    <script>
+      const betTable = document.getElementById("betTable");
+      const repeat = betTable.querySelector(".repeat");
+      for (let i = 0; i < 10; i++) {
+        const clone = template.cloneNode(true);
+        clone.querySelector(.bet).value = "";
+        betTable.appendChild(clone);
+      }
+    </script>
   </body>
 </html>
