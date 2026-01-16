@@ -70,7 +70,7 @@
       <div>安定性が低い</div>
       <div>調子がいいときだけ</div>
     </div>
-    <div class="betTable">
+    <div class="betTable" id="betTable">
       <div>種類</div>
       <div>馬</div>
       <div>金額</div>
@@ -127,11 +127,14 @@
     </div>
     <script>
       const betTable = document.getElementById("betTable");
-      const repeat = betTable.querySelector(".repeat");
+      const template = betTable.querySelector(".repeat");
       for (let i = 0; i < 10; i++) {
-        const clone = template.cloneNode(true);
-        clone.querySelector(.bet).value = "";
-        betTable.appendChild(clone);
+        template.forEach(cell => {
+          const clone = cell.cloneNode(true);
+          const bet = clone.querySelector("bet");
+          if (bet) bet.value = "";
+          betTable.appendChile(clone);
+        });
       }
     </script>
   </body>
