@@ -8,15 +8,13 @@
   </head>
   <body>
     <style>
-      body {
-        gap: 24px;
-      }
       .table {
         display: grid;
         grid-template-columns: 50px 200px 200px 200px;
         grid-auto-rows: 30px;
         font-size: 15px;
         border: 1px solid black;
+        margin-bottom: 24px;
       }
       .table div {
         border: 1px solid black;
@@ -46,7 +44,7 @@
       <div>スタミナが低い</div>
       <div>1200〜1400m</div>
       <div>2番</div>
-      <div>スタートダッシュ最強、前に行くほど強い</div>
+      <div>スタートダッシュ最強</div>
       <div>せられると失速する</div>
       <div>少頭数、ハイペース</div>
       <div>3番</div>
@@ -137,8 +135,8 @@
     </div>
     <script>
       const betTable = document.getElementById("betTable");
-      const templates = betTable.querySelector(".repeat");
-      for (let i = 0; i < 10; i++) {
+      const templates = betTable.querySelectorAll(".repeat");
+      for (let i = 0; i < 4; i++) {
         templates.forEach(cell => {
           const clone = cell.cloneNode(true);
           const bet = clone.querySelector(".bet");
