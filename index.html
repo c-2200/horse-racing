@@ -146,7 +146,9 @@
         });
       }
       betTable.querySelectorAll(".betHorse").forEach(row => {
-        row.style.visibility = "hidden";
+        row.querySelectorAll("span, select").forEach(el => {
+          el.style.visibility = "hidden";
+        });
       });
       betTable.querySelectorAll(".ticket").forEach(ticket => {
         ticket.addEventListener("change", () => {
