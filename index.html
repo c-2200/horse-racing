@@ -156,53 +156,53 @@
           if (!betHorse || !betHorse.classList.contains("betHorse")) return;
           if (value == "none") {
             betHorse.querySelectorAll("span, select").forEach(el => {
-              el.style.visiblity = "hidden";
+              el.style.visibility = "hidden";
             });
           } else if (value == "win") {
             betHorse.querySelectorAll(".select1, .first").forEach(el => {
-              el.style.visiblity = "visible";
+              el.style.visibility = "visible";
             });
             betHorse.querySelectorAll(".second, .select2, .third, .select3").forEach(el => {
-              el.style.visiblity = "hidden";
+              el.style.visibility = "hidden";
             });
           } else if (value == "place") {
             betHorse.querySelectorAll(".select1").forEach(el => {
-              el.style.visiblity = "visible";
+              el.style.visibility = "visible";
             });
             betHorse.querySelectorAll(".first, .second, .select2, .third, .select3").forEach(el => {
-              el.style.visiblity = "hidden";
+              el.style.visibility = "hidden";
             });
           } else if (value == "quinella") {
             betHorse.querySelectorAll(".select1, .select2").forEach(el => {
-              el.style.visiblity = "visible";
+              el.style.visibility = "visible";
             });
             betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
-              el.style.visiblity = "hidden";
+              el.style.visibility = "hidden";
             });
           } else if (value == "exacta") {
             betHorse.querySelectorAll(".first, .select1, .second, .select2").forEach(el => {
-              el.style.visiblity = "visible";
+              el.style.visibility = "visible";
             });
             betHorse.querySelectorAll(".third, .select3").forEach(el => {
-              el.style.visiblity = "hidden";
+              el.style.visibility = "hidden";
             });
           } else if (value == "wide") {
             betHorse.querySelectorAll(".select1, .select2").forEach(el => {
-              el.style.visiblity = "visible";
+              el.style.visibility = "visible";
             });
             betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
-              el.style.visiblity = "hidden";
+              el.style.visibility = "hidden";
             });
           } else if (value == "trio") {
             betHorse.querySelectorAll(".select1, .select2, .select3").forEach(el => {
-              el.style.visiblity = "visible";
+              el.style.visibility = "visible";
             });
             betHorse.querySelectorAll(".first, .second, .third").forEach(el => {
-              el.style.visiblity = "hidden";
+              el.style.visibility = "hidden";
             });
           } else if (value == "trifecta") {
             betHorse.querySelectorAll(".first, .select1, .second, .select2, .third, .select3").forEach(el => {
-              el.style.visiblity = "visible";
+              el.style.visibility = "visible";
             });
           }
         });
