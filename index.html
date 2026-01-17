@@ -24,7 +24,7 @@
       .betTable {
         display: grid;
         grid-template-columns: 75px 300px 275px;
-        grid-template-rows: repeat(11, 40px);
+        grid-template-rows: betRow(11, 40px);
         font-size: 20px;
         border: 1px solid black;
       }
@@ -80,8 +80,9 @@
       <div>種類</div>
       <div>馬</div>
       <div>金額</div>
-      <div class="repeat">
+      <div class="betRow">
         <select id="ticket">
+          <option value="none"></option>
           <option value="win">単勝</option>
           <option value="place">複勝</option>
           <option value="quinella">馬連</option>
@@ -91,9 +92,9 @@
           <option value="trifecta">三連単</option>
         </select>
       </div>
-      <div class="repeat">
-        <span id="first">1着</span>
-        <select id="select1">
+      <div class="betRow betHorse">
+        <span class="first">1着</span>
+        <select class="select1">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -104,8 +105,8 @@
           <option value="8">8</option>
           <option value="9">9</option>
         </select>
-        <span id="second">2着</span>
-        <select id="select2">
+        <span class="second">2着</span>
+        <select class="select2">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -116,8 +117,8 @@
           <option value="8">8</option>
           <option value="9">9</option>
         </select>
-        <span id="third">2着</span>
-        <select id="select3">
+        <span class="third">3着</span>
+        <select class="select3">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -129,13 +130,13 @@
           <option value="9">9</option>
         </select>
       </div>
-      <div class="repeat">
+      <div class="betRow">
         <input class="bet" type="number" min="0" step="1">
       </div>
     </div>
     <script>
       const betTable = document.getElementById("betTable");
-      const templates = betTable.querySelectorAll(".repeat");
+      const templates = betTable.querySelectorAll(".betRow");
       for (let i = 0; i < 10; i++) {
         templates.forEach(cell => {
           const clone = cell.cloneNode(true);
@@ -144,6 +145,9 @@
           betTable.appendChild(clone);
         });
       }
+      betTable.querySelectorAll(".betHorse").forEach(row => {
+        row.style.display = "none";
+      });
     </script>
   </body>
 </html>
