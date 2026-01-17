@@ -27,6 +27,11 @@
         font-size: 30px;
         border: 1px solid black;
       }
+      .betTable > div {
+        border: 1px solid black;
+        padding: 4px;
+        box-sizing: border-box;
+      }
     </style>
     <div class="table" id="table">
       <div>名前</div>
@@ -124,18 +129,18 @@
         </select>
       </div>
       <div class="repeat">
-        <input id="bet" type="number" min="0" step="1">
+        <input class="bet" type="number" min="0" step="1">
       </div>
     </div>
     <script>
       const betTable = document.getElementById("betTable");
-      const template = betTable.querySelector(".repeat");
+      const templates = betTable.querySelector(".repeat");
       for (let i = 0; i < 10; i++) {
-        template.forEach(cell => {
+        templates.forEach(cell => {
           const clone = cell.cloneNode(true);
-          const bet = clone.querySelector("bet");
+          const bet = clone.querySelector(".bet");
           if (bet) bet.value = "";
-          betTable.appendChile(clone);
+          betTable.appendChild(clone);
         });
       }
     </script>
