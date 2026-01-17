@@ -33,6 +33,29 @@
         padding: 2px;
         box-sizing: border-box;
       }
+      .info {
+        display: grid;
+        grid-template-columns: 125px 125px
+        grid-template- rows: 50px
+        font-size: 20px;
+        border: 1px solid black;
+      }
+      .info > div {
+        border: 1px solid black;
+        padding: 2px;
+        box-sizing: border-box;
+      }
+      .startButton {
+        width: 100px;
+        height: 50px;
+        background-color: crimson;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
     </style>
     <div class="table" id="table">
       <div>名前</div>
@@ -75,6 +98,10 @@
       <div>能力振れ幅が大きい</div>
       <div>安定性が低い</div>
       <div>調子がいいときだけ</div>
+    </div>
+    <div class="info">
+      <div id="money">1000</div>
+      <button class="startButton">START</button>
     </div>
     <div class="betTable" id="betTable">
       <div>種類</div>
