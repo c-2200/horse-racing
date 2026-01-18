@@ -261,7 +261,7 @@
       });
       function updateMoney() {
         let totalBet = 0;
-        betTabel.querySelectorAll(".bet").forEach(bet => {
+        betTable.querySelectorAll(".bet").forEach(bet => {
           totalBet += Number(bet.value) || 0;
         });
         money.textContent = initialMoney - totalBet;
