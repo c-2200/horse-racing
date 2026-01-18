@@ -34,6 +34,16 @@
         padding: 2px;
         box-sizing: border-box;
       }
+      .track {
+        position: relative;
+        width: 650px;
+        height: 360px;
+        border: 1px solid black;
+      }
+      .item {
+        position: absolute;
+        witdh: 25px;
+      }
       .betTable {
         display: grid;
         grid-template-columns: 75px 300px 275px;
@@ -187,6 +197,7 @@
       const templates = betTable.querySelectorAll(".betRow");
       const money = document.getElementById("money");
       const initialMoney = Number(money.textContent);
+      const startButton = document.querySelector(".startButton");
       for (let i = 0; i < 10; i++) {
         templates.forEach(cell => {
           const clone = cell.cloneNode(true);
@@ -269,6 +280,9 @@
       betTable.querySelectorAll(".bet").forEach(bet => {
         bet.addEventListener("input", updateMoney);
       });
+      startButton.onclick = () => {
+        
+      };
     </script>
   </body>
 </html>
