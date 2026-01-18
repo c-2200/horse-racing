@@ -20,7 +20,7 @@
       }
       .table {
         display: grid;
-        grid-template-columns: 50px 200px 200px 200px;
+        grid-template-columns: 50px 200px 200px 200px 50px;
         grid-auto-rows: 30px;
         font-size: 15px;
         border: 1px solid black;
@@ -93,42 +93,52 @@
       <div>特長</div>
       <div>弱点</div>
       <div>得意条件</div>
+      <div>調子</div>
       <div>1番</div>
       <div>スピード、加速が速い</div>
       <div>スタミナが低い</div>
       <div>1200〜1400m</div>
+      <div id="condition1"></div>
       <div>2番</div>
       <div>スタートダッシュ最強</div>
       <div>せられると失速する</div>
       <div>少頭数、ハイペース</div>
+      <div id="condition2"></div>
       <div>3番</div>
       <div>後半の伸びが安定</div>
       <div>展開依存度が高い</div>
       <div>平均〜ハイペース</div>
+      <div id="condition3"></div>
       <div>4番</div>
       <div>末脚最強、ハマると圧勝</div>
       <div>不発率が高い</div>
       <div>ハイペース、長い直線コース</div>
+      <div id="condition4"></div>
       <div>5番</div>
       <div>能力が全体的に高い</div>
       <div>突出した強みがない</div>
       <div>1600〜2000m</div>
+      <div id="condition5"></div>
       <div>6番</div>
       <div>スタミナ特化、消耗戦に強い</div>
       <div>スピード不足</div>
       <div>3000m以上</div>
+      <div id="condition6"></div>
       <div>7番</div>
       <div>馬場状況が悪いと強くなる</div>
       <div>良馬場では平凡</div>
       <div>重・不良馬場</div>
+      <div id="condition7"></div>
       <div>8番</div>
       <div>ダートの時に速い</div>
       <div>芝はほぼ走らない</div>
       <div>ダート全般</div>
+      <div id="condition8"></div>
       <div>9番</div>
       <div>能力振れ幅が大きい</div>
       <div>安定性が低い</div>
       <div>調子がいいときだけ</div>
+      <div id="condition9"></div>
     </div>
     <div class="info">
       <div id="money">1000</div>
@@ -193,6 +203,15 @@
       </div>
     </div>
     <script>
+      const condition1 = document.getElementById("condition1");
+      const condition2 = document.getElementById("condition2");
+      const condition3 = document.getElementById("condition3");
+      const condition4 = document.getElementById("condition4");
+      const condition5 = document.getElementById("condition5");
+      const condition6 = document.getElementById("condition6");
+      const condition7 = document.getElementById("condition7");
+      const condition8 = document.getElementById("condition8");
+      const condition9 = document.getElementById("condition9");
       const betTable = document.getElementById("betTable");
       const templates = betTable.querySelectorAll(".betRow");
       const money = document.getElementById("money");
