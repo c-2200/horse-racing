@@ -185,6 +185,8 @@
     <script>
       const betTable = document.getElementById("betTable");
       const templates = betTable.querySelectorAll(".betRow");
+      const money = document.getElementById("money");
+      const initialMoney = Number(money.textContent);
       for (let i = 0; i < 10; i++) {
         templates.forEach(cell => {
           const clone = cell.cloneNode(true);
@@ -256,6 +258,16 @@
             });
           }
         });
+      });
+      function updateMoney() {
+        let totalBet = 0;
+        betTabel.querySelectorAll(".bet").forEach(bet => {
+          totalBet += Number(bet.value) || 0;
+        });
+        money.textContent = initialMoney - totalBet;
+      }
+      betTable.querySelectorAll(".bet").forEach(bet => {
+        bet.addEventListener("input", updateMoney);
       });
     </script>
   </body>
