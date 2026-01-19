@@ -18,6 +18,13 @@
         gap: 24px;
         padding: 24px 0;
       }
+      .course {
+        display: grid;
+        grid-template-columns: 100px 100px;
+        grid-template-rows: 30px;
+        font-size: 20px;
+        border: 1px solid black;
+      }
       .table {
         display: grid;
         grid-template-columns: 50px 200px 200px 200px 50px;
@@ -39,7 +46,6 @@
       }
       .item {
         position: absolute;
-        border: 1px solid red;
       }
       .betTable {
         display: grid;
@@ -86,6 +92,10 @@
       }
     </style>
     <div class="container">
+      <div class="course">
+        <div>今回の馬場</div>
+        <div id="course"></div>
+      </div>
       <div class="table" id="table">
         <div>名前</div>
         <div>特長</div>
@@ -228,6 +238,8 @@
         const money = document.getElementById("money");
         const initialMoney = Number(money.textContent);
         const startButton = document.querySelector(".startButton");
+        const course = document.getElementById("course");
+        const courseRate = Math.floor(Math.random() * 2);
         for (let i = 1; i <= 9; i++) {
           if (1 <= i && i <= 8) {
             const rate = Math.floor(Math.random() * 10);
