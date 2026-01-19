@@ -36,7 +36,7 @@
       }
       .track {
         position: relative;
-        width: 650px;
+        width: 700px;
         height: 360px;
         border: 1px solid black;
       }
@@ -140,6 +140,17 @@
       <div>調子がいいときだけ</div>
       <div id="condition9"></div>
     </div>
+    <div class="track">
+      <img src="img1.png" class="item" id="horse1">
+      <img src="img2.png" class="item" id="horse2">
+      <img src="img3.png" class="item" id="horse3">
+      <img src="img4.png" class="item" id="horse4">
+      <img src="img5.png" class="item" id="horse5">
+      <img src="img6.png" class="item" id="horse6">
+      <img src="img7.png" class="item" id="horse7">
+      <img src="img8.png" class="item" id="horse8">
+      <img src="img9.png" class="item" id="horse9">
+    </div>
     <div class="info">
       <div id="money">1000</div>
       <button class="startButton">START</button>
@@ -203,105 +214,148 @@
       </div>
     </div>
     <script>
-      const condition1 = document.getElementById("condition1");
-      const condition2 = document.getElementById("condition2");
-      const condition3 = document.getElementById("condition3");
-      const condition4 = document.getElementById("condition4");
-      const condition5 = document.getElementById("condition5");
-      const condition6 = document.getElementById("condition6");
-      const condition7 = document.getElementById("condition7");
-      const condition8 = document.getElementById("condition8");
-      const condition9 = document.getElementById("condition9");
-      const betTable = document.getElementById("betTable");
-      const templates = betTable.querySelectorAll(".betRow");
-      const money = document.getElementById("money");
-      const initialMoney = Number(money.textContent);
-      const startButton = document.querySelector(".startButton");
-      for (let i = 0; i < 10; i++) {
-        templates.forEach(cell => {
-          const clone = cell.cloneNode(true);
-          const bet = clone.querySelector(".bet");
-          if (bet) bet.value = "";
-          betTable.appendChild(clone);
-        });
-      }
-      betTable.querySelectorAll(".betHorse").forEach(row => {
-        row.querySelectorAll("span, select").forEach(el => {
-          el.style.visibility = "hidden";
-        });
-      });
-      betTable.querySelectorAll(".ticket").forEach(ticket => {
-        ticket.addEventListener("change", () => {
-          const value = ticket.value;
-          const betRow = ticket.closest(".betRow");
-          const betHorse = betRow.nextElementSibling;
-          if (!betHorse || !betHorse.classList.contains("betHorse")) return;
-          if (value == "none") {
-            betHorse.querySelectorAll("span, select").forEach(el => {
-              el.style.visibility = "hidden";
-            });
-          } else if (value == "win") {
-            betHorse.querySelectorAll(".select1, .first").forEach(el => {
-              el.style.visibility = "visible";
-            });
-            betHorse.querySelectorAll(".second, .select2, .third, .select3").forEach(el => {
-              el.style.visibility = "hidden";
-            });
-          } else if (value == "place") {
-            betHorse.querySelectorAll(".select1").forEach(el => {
-              el.style.visibility = "visible";
-            });
-            betHorse.querySelectorAll(".first, .second, .select2, .third, .select3").forEach(el => {
-              el.style.visibility = "hidden";
-            });
-          } else if (value == "quinella") {
-            betHorse.querySelectorAll(".select1, .select2").forEach(el => {
-              el.style.visibility = "visible";
-            });
-            betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
-              el.style.visibility = "hidden";
-            });
-          } else if (value == "exacta") {
-            betHorse.querySelectorAll(".first, .select1, .second, .select2").forEach(el => {
-              el.style.visibility = "visible";
-            });
-            betHorse.querySelectorAll(".third, .select3").forEach(el => {
-              el.style.visibility = "hidden";
-            });
-          } else if (value == "wide") {
-            betHorse.querySelectorAll(".select1, .select2").forEach(el => {
-              el.style.visibility = "visible";
-            });
-            betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
-              el.style.visibility = "hidden";
-            });
-          } else if (value == "trio") {
-            betHorse.querySelectorAll(".select1, .select2, .select3").forEach(el => {
-              el.style.visibility = "visible";
-            });
-            betHorse.querySelectorAll(".first, .second, .third").forEach(el => {
-              el.style.visibility = "hidden";
-            });
-          } else if (value == "trifecta") {
-            betHorse.querySelectorAll(".first, .select1, .second, .select2, .third, .select3").forEach(el => {
-              el.style.visibility = "visible";
-            });
+      function replay() {
+        const horse1 = document.getElementById("horse1");
+        const horse2 = document.getElementById("horse2");
+        const horse3 = document.getElementById("horse3");
+        const horse4 = document.getElementById("horse4");
+        const horse5 = document.getElementById("horse5");
+        const horse6 = document.getElementById("horse6");
+        const horse7 = document.getElementById("horse7");
+        const horse8 = document.getElementById("horse8");
+        const horse9 = document.getElementById("horse9");
+        const betTable = document.getElementById("betTable");
+        const templates = betTable.querySelectorAll(".betRow");
+        const money = document.getElementById("money");
+        const initialMoney = Number(money.textContent);
+        const startButton = document.querySelector(".startButton");
+        for (let i = 1; i <= 8; i++) {
+          const rate = Math.floor(Math.random() * 10);
+          if (0 <= rate && rate <= 1) {
+            document.getElementById(`condition${i}`).textContent = "△";
+          } else if (2 <= rate && rate <= 5) {
+            document.getElementById(`condition${i}`).textContent = "◯";
+          } else if (6 <= rate && rate <= 9) {
+            document.getElementById(`condition${i}`).textContent = "◎";
           }
+        }
+        const rate = Math.floor(Math.random() * 20);
+        if (0 <= rate && rate <= 9) {
+          document.getElementById("condition9").textContent = "△";
+        } else if (10 <= rate && rate <= 14) {
+          document.getElementById("condition9").textContent = "◯";
+        } else if (15 <= rate && rate <= 19) {
+          document.getElementById("condition9").textContent = "◎";
+        }
+        const condition1 = document.getElementById("condition1").textContent;
+        const condition2 = document.getElementById("condition2").textContent;
+        const condition3 = document.getElementById("condition3").textContent;
+        const condition4 = document.getElementById("condition4").textContent;
+        const condition5 = document.getElementById("condition5").textContent;
+        const condition6 = document.getElementById("condition6").textContent;
+        const condition7 = document.getElementById("condition7").textContent;
+        const condition8 = document.getElementById("condition8").textContent;
+        const condition9 = document.getElementById("condition9").textContent;
+        for (let i = 0; i < 10; i++) {
+          templates.forEach(cell => {
+            const clone = cell.cloneNode(true);
+            const bet = clone.querySelector(".bet");
+            if (bet) bet.value = "";
+            betTable.appendChild(clone);
+          });
+        }
+        betTable.querySelectorAll(".betHorse").forEach(row => {
+          row.querySelectorAll("span, select").forEach(el => {
+            el.style.visibility = "hidden";
+          });
         });
-      });
-      function updateMoney() {
-        let totalBet = 0;
+        betTable.querySelectorAll(".ticket").forEach(ticket => {
+          ticket.addEventListener("change", () => {
+            const value = ticket.value;
+            const betRow = ticket.closest(".betRow");
+            const betHorse = betRow.nextElementSibling;
+            if (!betHorse || !betHorse.classList.contains("betHorse")) return;
+            if (value == "none") {
+              betHorse.querySelectorAll("span, select").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "win") {
+              betHorse.querySelectorAll(".select1, .first").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".second, .select2, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "place") {
+              betHorse.querySelectorAll(".select1").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .select2, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "quinella") {
+              betHorse.querySelectorAll(".select1, .select2").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "exacta") {
+              betHorse.querySelectorAll(".first, .select1, .second, .select2").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "wide") {
+              betHorse.querySelectorAll(".select1, .select2").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "trio") {
+              betHorse.querySelectorAll(".select1, .select2, .select3").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .third").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "trifecta") {
+              betHorse.querySelectorAll(".first, .select1, .second, .select2, .third, .select3").forEach(el => {
+                el.style.visibility = "visible";
+              });
+            }
+          });
+        });
+        function updateMoney() {
+          let totalBet = 0;
+          betTable.querySelectorAll(".bet").forEach(bet => {
+            totalBet += Number(bet.value) || 0;
+          });
+          money.textContent = initialMoney - totalBet;
+        }
         betTable.querySelectorAll(".bet").forEach(bet => {
-          totalBet += Number(bet.value) || 0;
+          bet.addEventListener("input", updateMoney);
         });
-        money.textContent = initialMoney - totalBet;
+        startButton.onclick = () => {
+          const horses = {
+            horse1: {x: 20, y: 20}, horse2: {x: 60, y: 20}, horse3: {x: 100, y: 20}, horse4: {x: 140, y: 20}, horse5: {x: 180, y: 20},
+            horse6: {x: 220, y: 20}, horse7: {x: 260, y: 20}, horse8: {x: 300, y: 20}, horse9: {x: 340, y: 20}
+          };
+          function updatePosition(id) {
+            const el = document.getElementById(id);
+            const pos = horses[id];
+            el.style.left = pos.x + "px";
+            el.style.top = pos.y + "px";
+          }
+          function moveHorse(id, dx, dy) {
+            horses[id].x += dx;
+            horses[id].y += dy;
+            updatePosition(id);
+          }
+        };
       }
-      betTable.querySelectorAll(".bet").forEach(bet => {
-        bet.addEventListener("input", updateMoney);
-      });
-      startButton.onclick = () => {
-        
-      };
     </script>
   </body>
 </html>
