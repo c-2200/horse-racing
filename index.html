@@ -303,6 +303,8 @@
             betTable.appendChild(clone);
           });
         }
+        const track = document.querySelector(".track");
+        track.style.display = "none";
         betTable.querySelectorAll(".betHorse").forEach(row => {
           row.querySelectorAll("span, select").forEach(el => {
             el.style.visibility = "hidden";
