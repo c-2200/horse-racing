@@ -39,7 +39,6 @@
       }
       .item {
         position: absolute;
-        witdh: 25px;
       }
       .betTable {
         display: grid;
@@ -350,6 +349,9 @@
             horses[id].x += dx;
             horses[id].y += dy;
             updatePosition(id);
+          }
+          for (let i = 1; i <= 9; i++) {
+            moveHorse(`horse${i}`, 0, 0);
           }
         };
       }
