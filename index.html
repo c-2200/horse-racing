@@ -20,7 +20,7 @@
       }
       .course {
         display: grid;
-        grid-template-columns: 100px 100px;
+        grid-template-columns: 100px 200px;
         grid-template-rows: 30px;
         font-size: 20px;
         border: 1px solid black;
@@ -240,6 +240,31 @@
         const startButton = document.querySelector(".startButton");
         const course = document.getElementById("course");
         const courseRate = Math.floor(Math.random() * 2);
+        const courseConditionRate = Math.floor(Math.random() * 4);
+        const distance = Math.floor(Math.random() * 4);
+        if (courseRate == 0) {
+          course.textContent += "芝・";
+        } else if (courseRate == 1) {
+          course.textContent += "ダート・";
+        }
+        if (courseConditionRate == 0) {
+          course.textContent += "良。";
+        } else if (courseConditionRate == 1) {
+          course.textContent += "稍重。";
+        } else if (courseConditionRate == 2) {
+          course.textContent += "重。";
+        } else if (courseConditionRate == 3) {
+          course.textContent += "不良。";
+        }
+        if (distance == 0) {
+          course.textContent += "1200m。";
+        } else if (distance == 1) {
+          course.textContent += "1600m。";
+        } else if (distance == 2) {
+          course.textContent += "2000m。";
+        } else if (distance == 3) {
+          course.textContent += "1500m。";
+        }
         for (let i = 1; i <= 9; i++) {
           if (1 <= i && i <= 8) {
             const rate = Math.floor(Math.random() * 10);
