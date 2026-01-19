@@ -84,129 +84,131 @@
         cursor: pointer;
       }
     </style>
-    <div class="table" id="table">
-      <div>名前</div>
-      <div>特長</div>
-      <div>弱点</div>
-      <div>得意条件</div>
-      <div>調子</div>
-      <div>1番</div>
-      <div>スピード、加速が速い</div>
-      <div>スタミナが低い</div>
-      <div>1200〜1400m</div>
-      <div id="condition1"></div>
-      <div>2番</div>
-      <div>スタートダッシュ最強</div>
-      <div>せられると失速する</div>
-      <div>少頭数、ハイペース</div>
-      <div id="condition2"></div>
-      <div>3番</div>
-      <div>後半の伸びが安定</div>
-      <div>展開依存度が高い</div>
-      <div>平均〜ハイペース</div>
-      <div id="condition3"></div>
-      <div>4番</div>
-      <div>末脚最強、ハマると圧勝</div>
-      <div>不発率が高い</div>
-      <div>ハイペース、長い直線コース</div>
-      <div id="condition4"></div>
-      <div>5番</div>
-      <div>能力が全体的に高い</div>
-      <div>突出した強みがない</div>
-      <div>1600〜2000m</div>
-      <div id="condition5"></div>
-      <div>6番</div>
-      <div>スタミナ特化､消耗戦に強い</div>
-      <div>スピード不足</div>
-      <div>3000m以上</div>
-      <div id="condition6"></div>
-      <div>7番</div>
-      <div>馬場状況が悪いと強くなる</div>
-      <div>良馬場では平凡</div>
-      <div>重・不良馬場</div>
-      <div id="condition7"></div>
-      <div>8番</div>
-      <div>ダートの時に速い</div>
-      <div>芝はほぼ走らない</div>
-      <div>ダート全般</div>
-      <div id="condition8"></div>
-      <div>9番</div>
-      <div>能力振れ幅が大きい</div>
-      <div>安定性が低い</div>
-      <div>調子がいいときだけ</div>
-      <div id="condition9"></div>
-    </div>
-    <div class="track">
-      <img src="img1.png" class="item" id="horse1">
-      <img src="img2.png" class="item" id="horse2">
-      <img src="img3.png" class="item" id="horse3">
-      <img src="img4.png" class="item" id="horse4">
-      <img src="img5.png" class="item" id="horse5">
-      <img src="img6.png" class="item" id="horse6">
-      <img src="img7.png" class="item" id="horse7">
-      <img src="img8.png" class="item" id="horse8">
-      <img src="img9.png" class="item" id="horse9">
-    </div>
-    <div class="info">
-      <div id="money">1000</div>
-      <button class="startButton">START</button>
-    </div>
-    <div class="betTable" id="betTable">
-      <div>種類</div>
-      <div>馬</div>
-      <div>金額</div>
-      <div class="betRow">
-        <select class="ticket">
-          <option value="none"></option>
-          <option value="win">単勝</option>
-          <option value="place">複勝</option>
-          <option value="quinella">馬連</option>
-          <option value="exacta">馬単</option>
-          <option value="wide">ワイド</option>
-          <option value="trio">三連複</option>
-          <option value="trifecta">三連単</option>
-        </select>
+    <div class="container">
+      <div class="table" id="table">
+        <div>名前</div>
+        <div>特長</div>
+        <div>弱点</div>
+        <div>得意条件</div>
+        <div>調子</div>
+        <div>1番</div>
+        <div>スピード、加速が速い</div>
+        <div>スタミナが低い</div>
+        <div>1200〜1400m</div>
+        <div id="condition1"></div>
+        <div>2番</div>
+        <div>スタートダッシュ最強</div>
+        <div>せられると失速する</div>
+        <div>少頭数、ハイペース</div>
+        <div id="condition2"></div>
+        <div>3番</div>
+        <div>後半の伸びが安定</div>
+        <div>展開依存度が高い</div>
+        <div>平均〜ハイペース</div>
+        <div id="condition3"></div>
+        <div>4番</div>
+        <div>末脚最強、ハマると圧勝</div>
+        <div>不発率が高い</div>
+        <div>ハイペース、長い直線コース</div>
+        <div id="condition4"></div>
+        <div>5番</div>
+        <div>能力が全体的に高い</div>
+        <div>突出した強みがない</div>
+        <div>1600〜2000m</div>
+        <div id="condition5"></div>
+        <div>6番</div>
+        <div>スタミナ特化､消耗戦に強い</div>
+        <div>スピード不足</div>
+        <div>3000m以上</div>
+        <div id="condition6"></div>
+        <div>7番</div>
+        <div>馬場状況が悪いと強くなる</div>
+        <div>良馬場では平凡</div>
+        <div>重・不良馬場</div>
+        <div id="condition7"></div>
+        <div>8番</div>
+        <div>ダートの時に速い</div>
+        <div>芝はほぼ走らない</div>
+        <div>ダート全般</div>
+        <div id="condition8"></div>
+        <div>9番</div>
+        <div>能力振れ幅が大きい</div>
+        <div>安定性が低い</div>
+        <div>調子がいいときだけ</div>
+        <div id="condition9"></div>
       </div>
-      <div class="betRow betHorse">
-        <span class="first">1着</span>
-        <select class="select1">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
-        <span class="second">2着</span>
-        <select class="select2">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
-        <span class="third">3着</span>
-        <select class="select3">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
+      <div class="track">
+        <img src="img1.png" class="item" id="horse1">
+        <img src="img2.png" class="item" id="horse2">
+        <img src="img3.png" class="item" id="horse3">
+        <img src="img4.png" class="item" id="horse4">
+        <img src="img5.png" class="item" id="horse5">
+        <img src="img6.png" class="item" id="horse6">
+        <img src="img7.png" class="item" id="horse7">
+        <img src="img8.png" class="item" id="horse8">
+        <img src="img9.png" class="item" id="horse9">
       </div>
-      <div class="betRow">
-        <input class="bet" type="number" min="0" step="1">
+      <div class="info">
+        <div id="money">1000</div>
+        <button class="startButton">START</button>
+      </div>
+      <div class="betTable" id="betTable">
+        <div>種類</div>
+        <div>馬</div>
+        <div>金額</div>
+        <div class="betRow">
+          <select class="ticket">
+            <option value="none"></option>
+            <option value="win">単勝</option>
+            <option value="place">複勝</option>
+            <option value="quinella">馬連</option>
+            <option value="exacta">馬単</option>
+            <option value="wide">ワイド</option>
+            <option value="trio">三連複</option>
+            <option value="trifecta">三連単</option>
+          </select>
+        </div>
+        <div class="betRow betHorse">
+          <span class="first">1着</span>
+          <select class="select1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <span class="second">2着</span>
+          <select class="select2">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <span class="third">3着</span>
+          <select class="select3">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+        <div class="betRow">
+          <input class="bet" type="number" min="0" step="1">
+        </div>
       </div>
     </div>
     <script>
