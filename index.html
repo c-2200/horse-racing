@@ -408,6 +408,9 @@
           for (let i = 1; i <= 9; i++) {
             moveHorse(`horse${i}`, 0, 0);
           }
+          function getNearHorse() {
+            
+          }
           let index = 1;
           let race = setInterval(() => {
             if (ground[0] == "grass" && ground[1] == "great" && ground[2] == 1200) {
@@ -422,7 +425,7 @@
                 const speed2 = (20 + Math.floor(Math.random() * 2)) / 10;
                 moveHorse("horse2", speed2, 0);
               } else {
-                //ここ
+                
               }
             }
           }, 50);
