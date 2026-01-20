@@ -20,7 +20,7 @@
       }
       .course {
         display: grid;
-        grid-template-columns: 100px 300px;
+        grid-template-columns: 125px 300px;
         grid-template-rows: 30px;
         font-size: 20px;
         border: 1px solid black;
@@ -242,19 +242,26 @@
         const courseRate = Math.floor(Math.random() * 2);
         const courseConditionRate = Math.floor(Math.random() * 4);
         const distance = Math.floor(Math.random() * 4);
+        const ground = [];
         if (courseRate == 0) {
           course.textContent += "芝・";
+          ground.push("grass");
         } else if (courseRate == 1) {
           course.textContent += "ダート・";
+          ground.push("dirt");
         }
         if (courseConditionRate == 0) {
           course.textContent += "良。";
+          ground.push("great");
         } else if (courseConditionRate == 1) {
           course.textContent += "稍重。";
+          ground.push("normal");
         } else if (courseConditionRate == 2) {
           course.textContent += "重。";
+          ground.push("bad");
         } else if (courseConditionRate == 3) {
           course.textContent += "不良。";
+          ground.push("worth");
         }
         if (distance == 0) {
           course.textContent += "1200m。";
@@ -398,6 +405,10 @@
           for (let i = 1; i <= 9; i++) {
             moveHorse(`horse${i}`, 0, 0);
           }
+          let index = 1;
+          let race = setInterval(() => {
+            
+          }, 100);
         };
       }
       replay();
