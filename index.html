@@ -240,7 +240,7 @@
         const startButton = document.querySelector(".startButton");
         const course = document.getElementById("course");
         const courseRate = Math.floor(Math.random() * 2);
-        const courseConditionRate = Math.floor(Math.random() * 4);
+        const courseConditionRate = Math.floor(Math.random() * 3);
         const distance = Math.floor(Math.random() * 3);
         const ground = [];
         if (courseRate == 0) {
@@ -257,11 +257,8 @@
           course.textContent += "稍重。";
           ground.push("normal");
         } else if (courseConditionRate == 2) {
-          course.textContent += "重。";
+          course.textContent += "重・不良";
           ground.push("bad");
-        } else if (courseConditionRate == 3) {
-          course.textContent += "不良。";
-          ground.push("worth");
         }
         if (distance == 0) {
           course.textContent += "1200m。";
@@ -294,15 +291,20 @@
             }
           }
         }
-        const condition1 = document.getElementById("condition1").textContent;
-        const condition2 = document.getElementById("condition2").textContent;
-        const condition3 = document.getElementById("condition3").textContent;
-        const condition4 = document.getElementById("condition4").textContent;
-        const condition5 = document.getElementById("condition5").textContent;
-        const condition6 = document.getElementById("condition6").textContent;
-        const condition7 = document.getElementById("condition7").textContent;
-        const condition8 = document.getElementById("condition8").textContent;
-        const condition9 = document.getElementById("condition9").textContent;
+        const conditions = [];
+        for (let i = 1; i <= 9; i++) {
+          conditions.push(document.getElementById(`condition${i}`).textContent);
+        }
+        const ratios = [];
+        for (let i = 1; i <= 9; i++) {
+          if (conditions[i] == "◎") {
+            ratios.push(1.1);
+          } else if (conditions[i] == "◯") {
+            ratios.push(1);
+          } else if (conditions[i] == "△") {
+            ratios.push(0.9);
+          }
+        }
         for (let i = 0; i < 10; i++) {
           templates.forEach(cell => {
             const clone = cell.cloneNode(true);
@@ -408,7 +410,7 @@
           for (let i = 1; i <= 9; i++) {
             moveHorse(`horse${i}`, 0, 0);
           }
-          function getNearHorse(baseName, range) {
+          function nearHorse(baseName, range) {
             const base = horses[baseName];
             return Object.entries(horses).filter(([name, pos]) =>
               name !== baseName && Math.abs(base.x - pos.x) <= range).map(([name]) => name);
@@ -417,17 +419,21 @@
           let race = setInterval(() => {
             if (ground[0] == "grass" && ground[1] == "great" && ground[2] == 1200) {
               if (1 <= index && index <= 15) {
-                const speed1 = (17 + Math.floor(Math.random() * 3)) / 10;
+                const speed1 = ((17 + Math.floor(Math.random() * 3)) / 10) * ratios[1];
                 moveHorse("horse1", speed1, 0);
               } else {
-                const speed1 = (19 + Math.floor(Math.random() * 3)) / 10;
+                const speed1 = ((19 + Math.floor(Math.random() * 3)) / 10) * ratios[1];
                 moveHorse("horse1", speed1, 0);
               }
               if (1 <= index && index <= 20) {
-                const speed2 = (20 + Math.floor(Math.random() * 2)) / 10;
+                const speed2 = ((20 + Math.floor(Math.random() * 2)) / 10) * ratios[2];
                 moveHorse("horse2", speed2, 0);
               } else {
-                if ()
+                nearHorse10 = nearHorse("horse2", 10);
+                nearHorse6 = nearHorse("horse2", 6);
+                if (nearHorse6.length > 0) {
+                  //ここ
+                }
               }
             }
           }, 50);
