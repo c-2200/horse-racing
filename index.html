@@ -417,24 +417,83 @@
           }
           let index = 1;
           let race = setInterval(() => {
+            const speed = [];
             if (ground[0] == "grass" && ground[1] == "great" && ground[2] == 1200) {
+              //horse1
               if (1 <= index && index <= 15) {
-                const speed1 = ((17 + Math.floor(Math.random() * 3)) / 10) * ratios[1];
-                moveHorse("horse1", speed1, 0);
+                speed.push(((17 + Math.floor(Math.random() * 3)) / 10) * ratios[1]);
               } else {
-                const speed1 = ((19 + Math.floor(Math.random() * 3)) / 10) * ratios[1];
-                moveHorse("horse1", speed1, 0);
+                speed.push(((19 + Math.floor(Math.random() * 3)) / 10) * ratios[1]);
               }
+              //horse2
               if (1 <= index && index <= 20) {
-                const speed2 = ((20 + Math.floor(Math.random() * 2)) / 10) * ratios[2];
-                moveHorse("horse2", speed2, 0);
+                speed.push(((20 + Math.floor(Math.random() * 2)) / 10) * ratios[2]);
               } else {
                 nearHorse10 = nearHorse("horse2", 10);
                 nearHorse6 = nearHorse("horse2", 6);
                 if (nearHorse6.length > 0) {
-                  //ここ
+                  speed.push(((17 + Math.floor(Math.random() * 2)) / 10) * ratios[2]);
+                } else if (nearHorse10.length > 0) {
+                  speed.push(((18 + Math.floor(Math.random() * 2)) / 10) * ratios[2]);
+                } else {
+                  speed.push(((19 + Math.floor(Math.random() * 3)) / 10) * ratios[2]);
                 }
               }
+              //horse3
+              if (1 <= index && index <= 70) {
+                speed.push(((17 + Math.floor(Math.random() * 3)) / 10) * ratios[3]);
+              } else if (71 <= index && index <= 110) {
+                speed.push(((18 + Math.floor(Math.random() * 3)) / 10) * ratios[3]);
+              } else {
+                speed.push(((19 + Math.floor(Math.random() * 3)) / 10) * ratios[3]);
+              }
+              //horse4
+              const finalKick;
+              if (ratios[4] == 1.1) {
+                if (Math.floor(Math.random() * 5) == 4) {
+                  finalKick = false;
+                } else {
+                  finalKick = true;
+                }
+              } else if (ratios[4] == 1) {
+                if (Math.floor(Math.random() * 2) == 0) {
+                  finalKick = true;
+                } else {
+                  finalKick = false;
+                }
+              } else if (ratios[4] == 0.9) {
+                if (Math.floor(Math.random() * 5) == 0) {
+                  finalKick = true;
+                } else {
+                  finalKick = false;
+                }
+              }
+              if (1 <= index && index <= 100) {
+                speed = (((17 + Math.floor(Math.random() * 3)) / 10) * ratios[4]);
+              } else {
+                if (finalKick) {
+                  speed = (((20 + Math.floor(Math.random() * 2)) / 10) * ratios[4]);
+                } else {
+                  speed = (((18 + Math.floor(Math.random() * 2)) / 10) * ratios[4]);
+                }
+              }
+              //horse5
+              speed = (((18 + Math.floor(Math.random() * 3)) / 10) * ratios[5]);
+              //horse6
+              speed = (((18 + Math.floor(Math.random() * 3)) / 10) * ratios[6]);
+              //horse7
+              speed = (((17 + Math.floor(Math.random() * 4)) / 10) * ratios[7]);
+              //horse8
+              speed = (((17 + Math.floor(Math.random() * 3)) / 10) * ratios[8]);
+              //horse9
+              const greatCondition;
+              if (ratios[9] == 1.1) {
+                if (Math.floor(Math.random() * 5) == 4) {
+                  greatCondition = false;
+                } else {
+                  greatCondition = true;
+                }
+              } //ここ
             }
           }, 50);
         };
