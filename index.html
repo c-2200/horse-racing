@@ -569,8 +569,8 @@
               }
               base *= ratios[i];
               moveHorse(`horse${i + 1}`, base, 0);
-              if (horses[`horse${i}`] >= 660) {
-                goalHorse.push(i);
+              if (horses[`horse${i + 1}`] >= 660) {
+                goalHorse.push(i + 1);
               }
             }
             index += 1;
