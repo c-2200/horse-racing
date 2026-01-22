@@ -569,12 +569,12 @@
               }
               base *= ratios[i];
               moveHorse(`horse${i + 1}`, base, 0);
-              if (horses[`horse${i + 1}`] >= 660) {
+              if (horses[`horse${i + 1}`].x >= 660) {
                 goalHorse.push(i + 1);
               }
             }
             index += 1;
-            if (Object.values(horses).every(h => h.x >= 660)) {
+            if (goalHorse.length >= 5)) {
               clearInterval(race);
               afterRace();
             }
