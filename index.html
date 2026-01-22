@@ -569,7 +569,7 @@
               }
               base *= ratios[i];
               moveHorse(`horse${i + 1}`, base, 0);
-              if (horses[`horse${i + 1}`].x >= 660) {
+              if (horses[`horse${i + 1}`].x >= 660 && !goalHorse.includes(i + 1)) {
                 goalHorse.push(i + 1);
               }
             }
