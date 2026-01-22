@@ -486,14 +486,14 @@
                 h3: betHorse.querySelector(".select3")?.value, amount
               });
             });
-            const first = goal[0];
-            const second = goal[1];
-            const third = goal[2];
+            const first = goalHorse[0];
+            const second = goalHorse[1];
+            const third = goalHorse[2];
             document.querySelector(".track").style.display = "none";
             document.querySelector(".goal").style.display = "block";
-            document.querySelector(".goal").textContent = `一着：${goal[0]}、二着：${goal[1]}、三着：${goal[2]}`;
+            document.querySelector(".goal").textContent = `一着：${goalHorse[0]}、二着：${goalHorse[1]}、三着：${goalHorse[2]}`;
             function isHit(bet, result) {
-              const [f, s, t] = goal.map(String);
+              const [f, s, t] = goalHorse.map(String);
               switch (bet.type) {
                 case "win":
                   return bet.h1 == f;
@@ -570,7 +570,7 @@
               base *= ratios[i];
               moveHorse(`horse${i + 1}`, base, 0);
               if (horses[`horse${i}`] >= 660) {
-                goal.push(i);
+                goalHorse.push(i);
               }
             }
             index += 1;
