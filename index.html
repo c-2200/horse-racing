@@ -530,7 +530,7 @@
                   payout += bet.amount * odds[bet.type];
                 }
               });
-              money.textContent = Number(money.textContent) + payout;
+              money.textContent = Math.floor(Number(money.textContent) + payout);
             });
             document.querySelector(".track").style.display = "none";
             document.querySelector(".goal").style.display = "block";
