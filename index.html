@@ -72,7 +72,7 @@
       }
       .info {
         display: grid;
-        grid-template-columns: 125px 125px;
+        grid-template-columns: 125px 125px 125px;
         grid-template-rows: 50px;
         font-size: 20px;
         align-items: center;
@@ -91,6 +91,17 @@
         width: 100px;
         height: 50px;
         background-color: crimson;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .replayButton {
+        width: 100px;
+        height: 50px;
+        background-color: gray;
         color: white;
         font-size: 22px;
         font-weight: bold;
@@ -170,6 +181,7 @@
       <div class="info">
         <div id="money">1000</div>
         <button class="startButton">START</button>
+        <button class="replayButton">REPLAY</button>
       </div>
       <div class="goal"></div>
       <div class="betTable" id="betTable">
@@ -248,6 +260,7 @@
         const money = document.getElementById("money");
         const initialMoney = Number(money.textContent);
         const startButton = document.querySelector(".startButton");
+        const replayButton = document.querySelector(".replayButton");
         const course = document.getElementById("course");
         const courseRate = Math.floor(Math.random() * 2);
         const courseConditionRate = Math.floor(Math.random() * 3);
@@ -582,6 +595,9 @@
         };
       }
       replay();
+      replayButton.onclick = () => {
+        replay()
+      };
     </script>
   </body>
 </html>
