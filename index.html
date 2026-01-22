@@ -245,6 +245,7 @@
     </div>
     <script>
       function replay() {
+        document.querySelector(".table").style.display = "block";
         document.querySelector(".goal").style.display = "none";
         const horse1 = document.getElementById("horse1");
         const horse2 = document.getElementById("horse2");
@@ -485,27 +486,7 @@
           }
           let index = 1;
           const goalHorse = [];
-          function afterRace() {
-            const bets = [];
-            betTable.querySelectorAll(".ticket").forEach(ticket => {
-              const row = ticket.closest(".betRow");
-              const betHorse = row.nextElementSibling;
-              const betMoney = betHorse.nextElementSibling.querySelector(".bet");
-              const type = ticket.value;
-              const amount = Number(betMoney.value) || 0;
-              if (type == "none" || amount == 0) return;
-              bets.push({
-                type, h1: betHorse.querySelector(".select1")?.value, h2: betHorse.querySelector(".select2")?.value,
-                h3: betHorse.querySelector(".select3")?.value, amount
-              });
-            });
-            const first = goalHorse[0];
-            const second = goalHorse[1];
-            const third = goalHorse[2];
-            document.querySelector(".track").style.display = "none";
-            document.querySelector(".goal").style.display = "block";
-            document.querySelector(".goal").textContent = `一着：${goalHorse[0]}、二着：${goalHorse[1]}、三着：${goalHorse[2]}`;
-            function isHit(bet, result) {
+          function isHit(bet, result) {
               const [f, s, t] = goalHorse.map(String);
               switch (bet.type) {
                 case "win":
@@ -525,6 +506,20 @@
                 default:
                   return false;
               }
+            }
+          function afterRace() {
+            const bets = [];
+            betTable.querySelectorAll(".ticket").forEach(ticket => {
+              const row = ticket.closest(".betRow");
+              const betHorse = row.nextElementSibling;
+              const betMoney = betHorse.nextElementSibling.querySelector(".bet");
+              const type = ticket.value;
+              const amount = Number(betMoney.value) || 0;
+              if (type == "none" || amount == 0) return;
+              bets.push({
+                type, h1: betHorse.querySelector(".select1")?.value, h2: betHorse.querySelector(".select2")?.value,
+                h3: betHorse.querySelector(".select3")?.value, amount
+              });
               const odds = {"win": 3, "place": 1.5, "quinella": 6, "exacta": 10, "wide": 3, "trio": 15, "trifecta": 30};
               let payout = 0;
               bets.forEach(bet => {
@@ -533,7 +528,13 @@
                 }
               });
               money.textContent = Number(money.textContent) + payout;
-            }
+            });
+            const first = goalHorse[0];
+            const second = goalHorse[1];
+            const third = goalHorse[2];
+            document.querySelector(".track").style.display = "none";
+            document.querySelector(".goal").style.display = "block";
+            document.querySelector(".goal").textContent = `一着：${goalHorse[0]}、二着：${goalHorse[1]}、三着：${goalHorse[2]}`;
           }
           let race = setInterval(() => {
             const speeds = Array(9).fill(0);
