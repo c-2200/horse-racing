@@ -519,7 +519,7 @@
               }
               base *= ratios[i];
               moveHorse(`horse${i + 1}`, base, 0);
-              if (horses[i] >= 660) {
+              if (horses[`horse${i}`] >= 660) {
                 goal.push(i);
               }
             }
@@ -529,9 +529,54 @@
             }
           }, 50);
         };
+        const bets = [];
+        betTable.querySelectorAll(".ticket").forEach(ticket => {
+          const row = ticket.closest(".betRow");
+          const betHorse = row.nextElementSibling;
+          const betMoney = betHorse.nextElementSibling.querySelector(".bet");
+          const type = ticket.value;
+          const amount = Number(betMoney.value) || 0;
+          if (type == "none" || amount == 0) return;
+          bets.push({
+            type, h1: betHorse.querySelector(".select1")?.value, h2: betHorse.querySelector(".select2")?.value,
+            h3: betHorse.querySelector(".select3")?.value, amount
+          });
+        });
+        const first = goal[0];
+        const second = goal[1];
+        const third = goal[2];
         document.querySelector(".track").style.display = "none";
         document.querySelector(".goal").style.display = "block";
         document.querySelector(".goal").textContent = `一着：${goal[0]}、二着：${goal[1]}、三着：${goal[2]}`;
+        function isHit(bet, result) {
+          const [f, s, t] = goal.map(String);
+          switch (bet.type) {
+            case "win":
+              return bet.h1 == f;
+            case "place":
+              return [f, s, t].includes(bet.h1);
+            case "quinella":
+              return [bet.h1, bet.h2].sort().join() == [f, s].sort().join();
+            case "exacta":
+              return bet.h1 == f && bet.h2 == s;
+            case "wide":
+              return [f, s, t].includes(bet.h1) && [f, s, t].includes(bet.h2);
+            case "trio":
+              return [bet.h1, bet.h2, bet.h3].sort().join() == [f, s, t].sort().join();
+            case "trifecta":
+              return bet.h1 == f && bet.h2 == s && bet.h3 == t;
+            default:
+              return false;
+          }
+          const odds = {"win": 3, "place": 1.5, "quinella": 6, "exacta": 10, "wide": 3, "trio": 15, "trifecta": 30};
+          let payout = 0;
+          bets.forEach(bet => {
+            if (isHit(bet, [first, second, third])) {
+              payout += bet.amount * odds[bet.type];
+            }
+          });
+          money.textContent = Number(money.textContent) + payout;
+        }
       }
       replay();
     </script>
