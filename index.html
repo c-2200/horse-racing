@@ -508,6 +508,9 @@
               moveHorse(`horse${i}`, base, 0);
             }
             index += 1
+            if (Object.values(horses).every(h => h.x >= 660)) {
+              clearInterval(race);
+            }
           }, 50);
         };
       }
