@@ -244,6 +244,7 @@
       </div>
     </div>
     <script>
+      const replayButton = document.querySelector(".replayButton");
       function replay() {
         document.querySelector(".table").style.display = "grid";
         document.querySelector(".goal").style.display = "none";
@@ -261,7 +262,6 @@
         const money = document.getElementById("money");
         const initialMoney = Number(money.textContent);
         const startButton = document.querySelector(".startButton");
-        const replayButton = document.querySelector(".replayButton");
         const course = document.getElementById("course");
         const courseRate = Math.floor(Math.random() * 2);
         const courseConditionRate = Math.floor(Math.random() * 3);
@@ -486,27 +486,30 @@
           }
           let index = 1;
           const goalHorse = [];
+          const first = goalHorse[0];
+          const second = goalHorse[1];
+          const third = goalHorse[2];
           function isHit(bet, result) {
-              const [f, s, t] = goalHorse.map(String);
-              switch (bet.type) {
-                case "win":
-                  return bet.h1 == f;
-                case "place":
-                  return [f, s, t].includes(bet.h1);
-                case "quinella":
-                  return [bet.h1, bet.h2].sort().join() == [f, s].sort().join();
-                case "exacta":
-                  return bet.h1 == f && bet.h2 == s;
-                case "wide":
-                  return [f, s, t].includes(bet.h1) && [f, s, t].includes(bet.h2);
-                case "trio":
-                  return [bet.h1, bet.h2, bet.h3].sort().join() == [f, s, t].sort().join();
-                case "trifecta":
-                  return bet.h1 == f && bet.h2 == s && bet.h3 == t;
-                default:
-                  return false;
-              }
+            const [f, s, t] = goalHorse.map(String);
+            switch (bet.type) {
+              case "win":
+                return bet.h1 == f;
+              case "place":
+                return [f, s, t].includes(bet.h1);
+              case "quinella":
+                return [bet.h1, bet.h2].sort().join() == [f, s].sort().join();
+              case "exacta":
+                return bet.h1 == f && bet.h2 == s;
+              case "wide":
+                return [f, s, t].includes(bet.h1) && [f, s, t].includes(bet.h2);
+              case "trio":
+                return [bet.h1, bet.h2, bet.h3].sort().join() == [f, s, t].sort().join();
+              case "trifecta":
+                return bet.h1 == f && bet.h2 == s && bet.h3 == t;
+              default:
+                return false;
             }
+          }
           function afterRace() {
             const bets = [];
             betTable.querySelectorAll(".ticket").forEach(ticket => {
@@ -529,9 +532,6 @@
               });
               money.textContent = Number(money.textContent) + payout;
             });
-            const first = goalHorse[0];
-            const second = goalHorse[1];
-            const third = goalHorse[2];
             document.querySelector(".track").style.display = "none";
             document.querySelector(".goal").style.display = "block";
             document.querySelector(".goal").textContent = `一着：${goalHorse[0]}、二着：${goalHorse[1]}、三着：${goalHorse[2]}`;
