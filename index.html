@@ -410,14 +410,6 @@
           for (let i = 1; i <= 9; i++) {
             moveHorse(`horse${i}`, 0, 0);
           }
-          function nearHorse(baseName, range) {
-            const base = horses[baseName];
-            return Object.entries(horses).filter(([name, pos]) =>
-              name !== baseName && Math.abs(base.x - pos.x) <= range).map(([name]) => name);
-          }
-          function randSpeed(max, min) {
-            return (min + Math.floor(Math.random() * (max - min + 1))) / 10;
-          }
           const horseProfile1200 = [
             [{from: 1, to: 30, min: 17, max: 19}, {from: 31, to: Infinity, min: 20, max: 21}],
             [{from: 1, to: 40, min: 20, max: 21}, {from: 41, to: Infinity, min: 18, max: 20}],
@@ -427,12 +419,95 @@
             ],
             [{from: 1, to: 225, min: 18, max: 19}, {from: 226, to: Infinity, min: 17, max: 19}],
             [{from: 1, to: Infinity, min: 18, max; 20}],
-            []
-          ]
+            [{from: 1, to: Infinity, min: 18, max: 20}],
+            [{from: 1, to: Infinity, min: 17, max: 20}],
+            [{from: 1, to: Infinity, min: 17, max: 20}],
+            [{from: 1, to: Infinity, min: 17, max: 19}]
+          ];
+          const horseProfile2000 = [
+            [{from: 1, to: 40, min: 13, max: 15}, {from: 41, to: 175, min: 15, max: 16}, {from: 176, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: 50, min: 15, max: 16}, {from: 51, to: 250, min: 14, max: 16}, {from: 251, to: Infinity, min: 14, max: 14}],
+            [{from: 1, to: 275, min: 13, max: 15}, {from; 276, to: Infinity, min: 14, max: 16}],
+            [{from: 1, to: 300, min: 13, max: 15}, {from: 301, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: Infinity, min: 13, max: 15}],
+            [{from: 1, to: Infinity, min: 13, max: 15}],
+            [{from: 1, to: Infinity, min: 13, max: 14}]
+          ];
+          const horseProfile3000 = [
+            [{from: 1, to: 50, min: 8, max: 10}, {from: 51, to: 250, min; 10, max: 11}, {from: 251, to: Infinity, min: 9, max: 10}],
+            [{from: 1, to: 60, min: 10, max: 11}, {from: 61, to: 300, min: 9, max: 11}, {from: 301, to: Infinity, min: 9, max: 10}],
+            [{from: 1, to: 375, min: 8, max: 10}, {from: 376, to: Infinity, min: 9, max: 11}],
+            [{from: 1, to: 400, min: 8, max: 10}, {from: 401, to: Infinity, min: 8, max: 9}],
+            [{from: 1, to: 420, min: 9, max: 10}, {from: 421, to: Infinity, min: 8, max: 10}],
+            [{from: 1, to: Infinity, min: 9, max: 11}],
+            [{from: 1, to: 375, min: 8, max: 10}, {from: 376, to: Infinity, min: 8, max: 9}],
+            [{from: 1, to: 375, min: 8, max: 10}, {from: 376, to: Infinity, min: 8, max: 9}],
+            [{from: 1, to: 400, min: 8, max: 10}, {from: 401, to: Infinity, min: 8, max: 9}]
+          ];
+          function nearHorse(baseName, range) {
+            const base = horses[baseName];
+            return Object.entries(horses).filter(([name, pos]) =>
+              name !== baseName && Math.abs(base.x - pos.x) <= range).map(([name]) => name);
+          }
+          function randSpeed(min, max) {
+            return (min + Math.floor(Math.random() * (max - min + 1))) / 10;
+          }
+          function getBaseSpeed(profile, index) {
+            const p = profile.find(r => r.from <= index && index <= r.to);
+            return randSpeed(p.min, p.max);
+          }
           let index = 1;
           let race = setInterval(() => {
             const speeds = Array(9).fill(0);
-            
+            const profile;
+            if (ground[2] == 1200) {
+              profile = horseProfile1200;
+            } else if (ground[2] == 2000) {
+              profile = horseProfile2000;
+            } else if (ground[2] == 3000) {
+              profile = horseProfile3000;
+            }
+            for (let i = 0; i < 9; i++) {
+              let base = getBaseSpeed(profile[i], index);
+              if (i == 1) {
+                if (nearHorse("horse2", 5).length) {
+                  base -= 0.2;
+                } else if (nearHorse("horse2", 7).length) {
+                  base -= 0.1;
+                }
+              } else if (i == 3) {
+                if (profile[i][1].from <= index) {
+                  if (
+                    (ratios[i] == 1.1 && [0, 1, 2, 3].includes(Math.floor(Math.random() * 5))) ||
+                    (ratios[i] == 1 && Math.floor(Math.random() * 2) == 0) ||
+                    (ratios[i] == 0.9 && Math.floor(Math.random() * 5) == 0)
+                  ) {
+                    base += 0.2;
+                  }
+                }
+              } else if (i == 6) {
+                if (["normal", "bad"].includes(ground[0])) {
+                  base += 0.2;
+                }
+              } else if (i == 7) {
+                if (ground[0] == "dirt") {
+                  base += 0.2;
+                }
+              } else if (i == 8) {
+                if (
+                  (ratios[i] == 1.1 && [0, 1, 2, 3].includes(Math.floor(Math.random() * 5))) ||
+                  (ratios[i] == 1 && Math.floor(Math.random() * 2) == 0) ||
+                  (ratios[i] == 0.9 && Math.floor(Math.random() * 5) == 0)
+                ) {
+                  base += 0.2;
+                }
+              }
+              base *= ratios[i];
+              moveHorse(`horse${i}`, base, 0);
+            }
+            index += 1
           }, 50);
         };
       }
