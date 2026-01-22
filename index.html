@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>競馬</title>
+  </head>
+  <body>
+    <style>
+      body {
+        margin: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 24px 0;
+      }
+      .course {
+        display: grid;
+        grid-template-columns: 125px 300px;
+        grid-template-rows: 30px;
+        font-size: 20px;
+        border: 1px solid black;
+      }
+      .table {
+        display: grid;
+        grid-template-columns: 50px 200px 200px 200px 50px;
+        grid-auto-rows: 30px;
+        font-size: 15px;
+        border: 1px solid black;
+        margin-bottom: 24px;
+      }
+      .table div {
+        border: 1px solid black;
+        padding: 2px;
+        box-sizing: border-box;
+      }
+      .track {
+        position: relative;
+        width: 700px;
+        height: 360px;
+        overflow: hidden;
+        border: 1px solid black;
+      }
+      .item {
+        position: absolute;
+      }
+      .goal {
+        display: grid;
+        grid-template-columns: 400px;
+        grid-template-rows: 30px;
+        font-size: 20px;
+        border: 1px solid black;
+      }
+      .betTable {
+        display: grid;
+        grid-template-columns: 75px 300px 275px;
+        grid-template-rows: betRow(11, 40px);
+        font-size: 20px;
+        border: 1px solid black;
+        width: fit-content;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      .betTable > div {
+        border: 1px solid black;
+        padding: 2px;
+        box-sizing: border-box;
+      }
+      .info {
+        display: grid;
+        grid-template-columns: 125px 125px;
+        grid-template-rows: 50px;
+        font-size: 20px;
+        align-items: center;
+        justify-items: center;
+        margin-bottom: 24px;
+        width: fit-content;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      .info > div {
+        border: 1px solid black;
+        padding: 2px;
+        box-sizing: border-box;
+      }
+      .startButton {
+        width: 100px;
+        height: 50px;
+        background-color: crimson;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    </style>
+    <div class="container">
+      <div class="course">
+        <div>今回の馬場：</div>
+        <div id="course"></div>
+      </div>
+      <div class="table" id="table">
+        <div>名前</div>
+        <div>特長</div>
+        <div>弱点</div>
+        <div>得意条件</div>
+        <div>調子</div>
+        <div>1番</div>
+        <div>スピード、加速が速い</div>
+        <div>スタミナが低い</div>
+        <div>1200〜1400m</div>
+        <div id="condition1"></div>
+        <div>2番</div>
+        <div>スタートダッシュ最強</div>
+        <div>せられると失速する</div>
+        <div>少頭数、ハイペース</div>
+        <div id="condition2"></div>
+        <div>3番</div>
+        <div>後半の伸びが安定</div>
+        <div>展開依存度が高い</div>
+        <div>平均〜ハイペース</div>
+        <div id="condition3"></div>
+        <div>4番</div>
+        <div>末脚最強、ハマると圧勝</div>
+        <div>不発率が高い</div>
+        <div>ハイペース、長い直線コース</div>
+        <div id="condition4"></div>
+        <div>5番</div>
+        <div>能力が全体的に高い</div>
+        <div>突出した強みがない</div>
+        <div>1600〜2000m</div>
+        <div id="condition5"></div>
+        <div>6番</div>
+        <div>スタミナ特化､消耗戦に強い</div>
+        <div>スピード不足</div>
+        <div>3000m以上</div>
+        <div id="condition6"></div>
+        <div>7番</div>
+        <div>馬場状況が悪いと強くなる</div>
+        <div>良馬場では平凡</div>
+        <div>重・不良馬場</div>
+        <div id="condition7"></div>
+        <div>8番</div>
+        <div>ダートの時に速い</div>
+        <div>芝はほぼ走らない</div>
+        <div>ダート全般</div>
+        <div id="condition8"></div>
+        <div>9番</div>
+        <div>能力振れ幅が大きい</div>
+        <div>安定性が低い</div>
+        <div>調子がいいときだけ</div>
+        <div id="condition9"></div>
+      </div>
+      <div class="track">
+        <img src="img1.png" class="item" id="horse1">
+        <img src="img2.png" class="item" id="horse2">
+        <img src="img3.png" class="item" id="horse3">
+        <img src="img4.png" class="item" id="horse4">
+        <img src="img5.png" class="item" id="horse5">
+        <img src="img6.png" class="item" id="horse6">
+        <img src="img7.png" class="item" id="horse7">
+        <img src="img8.png" class="item" id="horse8">
+        <img src="img9.png" class="item" id="horse9">
+      </div>
+      <div class="info">
+        <div id="money">1000</div>
+        <button class="startButton">START</button>
+      </div>
+      <div class="goal"></div>
+      <div class="betTable" id="betTable">
+        <div>種類</div>
+        <div>馬</div>
+        <div>金額</div>
+        <div class="betRow">
+          <select class="ticket">
+            <option value="none"></option>
+            <option value="win">単勝</option>
+            <option value="place">複勝</option>
+            <option value="quinella">馬連</option>
+            <option value="exacta">馬単</option>
+            <option value="wide">ワイド</option>
+            <option value="trio">三連複</option>
+            <option value="trifecta">三連単</option>
+          </select>
+        </div>
+        <div class="betRow betHorse">
+          <span class="first">1着</span>
+          <select class="select1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <span class="second">2着</span>
+          <select class="select2">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <span class="third">3着</span>
+          <select class="select3">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+        <div class="betRow">
+          <input class="bet" type="number" min="0" step="1">
+        </div>
+      </div>
+    </div>
+    <script>
+      function replay() {
+        document.querySelector(".goal").style.display = "none";
+        const horse1 = document.getElementById("horse1");
+        const horse2 = document.getElementById("horse2");
+        const horse3 = document.getElementById("horse3");
+        const horse4 = document.getElementById("horse4");
+        const horse5 = document.getElementById("horse5");
+        const horse6 = document.getElementById("horse6");
+        const horse7 = document.getElementById("horse7");
+        const horse8 = document.getElementById("horse8");
+        const horse9 = document.getElementById("horse9");
+        const betTable = document.getElementById("betTable");
+        const templates = betTable.querySelectorAll(".betRow");
+        const money = document.getElementById("money");
+        const initialMoney = Number(money.textContent);
+        const startButton = document.querySelector(".startButton");
+        const course = document.getElementById("course");
+        const courseRate = Math.floor(Math.random() * 2);
+        const courseConditionRate = Math.floor(Math.random() * 3);
+        const distance = Math.floor(Math.random() * 3);
+        const ground = [];
+        if (courseRate == 0) {
+          course.textContent += "芝・";
+          ground.push("grass");
+        } else if (courseRate == 1) {
+          course.textContent += "ダート・";
+          ground.push("dirt");
+        }
+        if (courseConditionRate == 0) {
+          course.textContent += "良。";
+          ground.push("great");
+        } else if (courseConditionRate == 1) {
+          course.textContent += "稍重。";
+          ground.push("normal");
+        } else if (courseConditionRate == 2) {
+          course.textContent += "重・不良";
+          ground.push("bad");
+        }
+        if (distance == 0) {
+          course.textContent += "1200m。";
+          ground.push(1200);
+        } else if (distance == 1) {
+          course.textContent += "2000m。";
+          ground.push(2000);
+        } else if (distance == 2) {
+          course.textContent += "3000m。";
+          ground.push(3000);
+        }
+        for (let i = 1; i <= 9; i++) {
+          if (1 <= i && i <= 8) {
+            const rate = Math.floor(Math.random() * 10);
+            if (0 <= rate && rate <= 1) {
+              document.getElementById(`condition${i}`).textContent = "△";
+            } else if (2 <= rate && rate <= 5) {
+              document.getElementById(`condition${i}`).textContent = "◯";
+            } else if (6 <= rate && rate <= 9) {
+              document.getElementById(`condition${i}`).textContent = "◎";
+            }
+          } else if (i == 9) {
+            const rate = Math.floor(Math.random() * 20);
+            if (0 <= rate && rate <= 9) {
+              document.getElementById("condition9").textContent = "△";
+            } else if (10 <= rate && rate <= 14) {
+              document.getElementById("condition9").textContent = "◯";
+            } else if (15 <= rate && rate <= 19) {
+              document.getElementById("condition9").textContent = "◎";
+            }
+          }
+        }
+        const conditions = [];
+        for (let i = 1; i <= 9; i++) {
+          conditions.push(document.getElementById(`condition${i}`).textContent);
+        }
+        const ratios = [];
+        for (let i = 0; i < 9; i++) {
+          if (conditions[i] == "◎") {
+            ratios.push(1.1);
+          } else if (conditions[i] == "◯") {
+            ratios.push(1);
+          } else if (conditions[i] == "△") {
+            ratios.push(0.9);
+          }
+        }
+        for (let i = 0; i < 10; i++) {
+          templates.forEach(cell => {
+            const clone = cell.cloneNode(true);
+            const bet = clone.querySelector(".bet");
+            if (bet) bet.value = "";
+            betTable.appendChild(clone);
+          });
+        }
+        const track = document.querySelector(".track");
+        track.style.display = "none";
+        betTable.querySelectorAll(".betHorse").forEach(row => {
+          row.querySelectorAll("span, select").forEach(el => {
+            el.style.visibility = "hidden";
+          });
+        });
+        betTable.querySelectorAll(".ticket").forEach(ticket => {
+          ticket.addEventListener("change", () => {
+            const value = ticket.value;
+            const betRow = ticket.closest(".betRow");
+            const betHorse = betRow.nextElementSibling;
+            if (!betHorse || !betHorse.classList.contains("betHorse")) return;
+            if (value == "none") {
+              betHorse.querySelectorAll("span, select").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "win") {
+              betHorse.querySelectorAll(".select1, .first").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".second, .select2, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "place") {
+              betHorse.querySelectorAll(".select1").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .select2, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "quinella") {
+              betHorse.querySelectorAll(".select1, .select2").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "exacta") {
+              betHorse.querySelectorAll(".first, .select1, .second, .select2").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "wide") {
+              betHorse.querySelectorAll(".select1, .select2").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .third, .select3").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "trio") {
+              betHorse.querySelectorAll(".select1, .select2, .select3").forEach(el => {
+                el.style.visibility = "visible";
+              });
+              betHorse.querySelectorAll(".first, .second, .third").forEach(el => {
+                el.style.visibility = "hidden";
+              });
+            } else if (value == "trifecta") {
+              betHorse.querySelectorAll(".first, .select1, .second, .select2, .third, .select3").forEach(el => {
+                el.style.visibility = "visible";
+              });
+            }
+          });
+        });
+        function updateMoney() {
+          let totalBet = 0;
+          betTable.querySelectorAll(".bet").forEach(bet => {
+            totalBet += Number(bet.value) || 0;
+          });
+          money.textContent = initialMoney - totalBet;
+        }
+        betTable.querySelectorAll(".bet").forEach(bet => {
+          bet.addEventListener("input", updateMoney);
+        });
+        startButton.onclick = () => {
+          document.querySelectorAll(".course, .table").forEach(el => {
+            el.style.display = "none";
+          });
+          document.querySelector(".track").style.display = "block";
+          const horses = {
+            horse1: {x: 0, y: 0}, horse2: {x: 0, y: 40}, horse3: {x: 0, y: 80}, horse4: {x: 0, y: 120}, horse5: {x: 0, y: 160},
+            horse6: {x: 0, y: 200}, horse7: {x: 0, y: 240}, horse8: {x: 0, y: 280}, horse9: {x: 0, y: 320}
+          };
+          function updatePosition(id) {
+            const el = document.getElementById(id);
+            const pos = horses[id];
+            el.style.left = pos.x + "px";
+            el.style.top = pos.y + "px";
+          }
+          function moveHorse(id, dx, dy) {
+            horses[id].x += dx;
+            horses[id].y += dy;
+            updatePosition(id);
+          }
+          for (let i = 1; i <= 9; i++) {
+            moveHorse(`horse${i}`, 0, 0);
+          }
+          const horseProfile1200 = [
+            [{from: 1, to: 30, min: 17, max: 19}, {from: 31, to: Infinity, min: 20, max: 21}],
+            [{from: 1, to: 40, min: 20, max: 21}, {from: 41, to: Infinity, min: 18, max: 20}],
+            [
+              {from: 1, to: 140, min: 17, max: 19}, {from: 141, to: 220, min: 18, max: 20},
+              {from: 221, to: Infinity, min: 19, max: 21}
+            ],
+            [{from: 1, to: 225, min: 18, max: 19}, {from: 226, to: Infinity, min: 17, max: 19}],
+            [{from: 1, to: Infinity, min: 18, max: 20}],
+            [{from: 1, to: Infinity, min: 18, max: 20}],
+            [{from: 1, to: Infinity, min: 17, max: 20}],
+            [{from: 1, to: Infinity, min: 17, max: 20}],
+            [{from: 1, to: Infinity, min: 17, max: 19}]
+          ];
+          const horseProfile2000 = [
+            [{from: 1, to: 40, min: 13, max: 15}, {from: 41, to: 175, min: 15, max: 16}, {from: 176, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: 50, min: 15, max: 16}, {from: 51, to: 250, min: 14, max: 16}, {from: 251, to: Infinity, min: 14, max: 14}],
+            [{from: 1, to: 275, min: 13, max: 15}, {from: 276, to: Infinity, min: 14, max: 16}],
+            [{from: 1, to: 300, min: 13, max: 15}, {from: 301, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: Infinity, min: 14, max: 15}],
+            [{from: 1, to: Infinity, min: 13, max: 15}],
+            [{from: 1, to: Infinity, min: 13, max: 15}],
+            [{from: 1, to: Infinity, min: 13, max: 14}]
+          ];
+          const horseProfile3000 = [
+            [{from: 1, to: 50, min: 8, max: 10}, {from: 51, to: 250, min: 10, max: 11}, {from: 251, to: Infinity, min: 9, max: 10}],
+            [{from: 1, to: 60, min: 10, max: 11}, {from: 61, to: 300, min: 9, max: 11}, {from: 301, to: Infinity, min: 9, max: 10}],
+            [{from: 1, to: 375, min: 8, max: 10}, {from: 376, to: Infinity, min: 9, max: 11}],
+            [{from: 1, to: 400, min: 8, max: 10}, {from: 401, to: Infinity, min: 8, max: 9}],
+            [{from: 1, to: 420, min: 9, max: 10}, {from: 421, to: Infinity, min: 8, max: 10}],
+            [{from: 1, to: Infinity, min: 9, max: 11}],
+            [{from: 1, to: 375, min: 8, max: 10}, {from: 376, to: Infinity, min: 8, max: 9}],
+            [{from: 1, to: 375, min: 8, max: 10}, {from: 376, to: Infinity, min: 8, max: 9}],
+            [{from: 1, to: 400, min: 8, max: 10}, {from: 401, to: Infinity, min: 8, max: 9}]
+          ];
+          function nearHorse(baseName, range) {
+            const base = horses[baseName];
+            return Object.entries(horses).filter(([name, pos]) =>
+              name !== baseName && Math.abs(base.x - pos.x) <= range).map(([name]) => name);
+          }
+          function randSpeed(min, max) {
+            return (min + Math.floor(Math.random() * (max - min + 1))) / 10;
+          }
+          function getBaseSpeed(profile, index) {
+            const p = profile.find(r => r.from <= index && index <= r.to);
+            return randSpeed(p.min, p.max);
+          }
+          let index = 1;
+          const goalHorse = [];
+          function afterRace() {
+            const bets = [];
+            betTable.querySelectorAll(".ticket").forEach(ticket => {
+              const row = ticket.closest(".betRow");
+              const betHorse = row.nextElementSibling;
+              const betMoney = betHorse.nextElementSibling.querySelector(".bet");
+              const type = ticket.value;
+              const amount = Number(betMoney.value) || 0;
+              if (type == "none" || amount == 0) return;
+              bets.push({
+                type, h1: betHorse.querySelector(".select1")?.value, h2: betHorse.querySelector(".select2")?.value,
+                h3: betHorse.querySelector(".select3")?.value, amount
+              });
+            });
+            const first = goalHorse[0];
+            const second = goalHorse[1];
+            const third = goalHorse[2];
+            document.querySelector(".track").style.display = "none";
+            document.querySelector(".goal").style.display = "block";
+            document.querySelector(".goal").textContent = `一着：${goalHorse[0]}、二着：${goalHorse[1]}、三着：${goalHorse[2]}`;
+            function isHit(bet, result) {
+              const [f, s, t] = goalHorse.map(String);
+              switch (bet.type) {
+                case "win":
+                  return bet.h1 == f;
+                case "place":
+                  return [f, s, t].includes(bet.h1);
+                case "quinella":
+                  return [bet.h1, bet.h2].sort().join() == [f, s].sort().join();
+                case "exacta":
+                  return bet.h1 == f && bet.h2 == s;
+                case "wide":
+                  return [f, s, t].includes(bet.h1) && [f, s, t].includes(bet.h2);
+                case "trio":
+                  return [bet.h1, bet.h2, bet.h3].sort().join() == [f, s, t].sort().join();
+                case "trifecta":
+                  return bet.h1 == f && bet.h2 == s && bet.h3 == t;
+                default:
+                  return false;
+              }
+              const odds = {"win": 3, "place": 1.5, "quinella": 6, "exacta": 10, "wide": 3, "trio": 15, "trifecta": 30};
+              let payout = 0;
+              bets.forEach(bet => {
+                if (isHit(bet, [first, second, third])) {
+                  payout += bet.amount * odds[bet.type];
+                }
+              });
+              money.textContent = Number(money.textContent) + payout;
+            }
+          }
+          let race = setInterval(() => {
+            const speeds = Array(9).fill(0);
+            let profile;
+            if (ground[2] == 1200) {
+              profile = horseProfile1200;
+            } else if (ground[2] == 2000) {
+              profile = horseProfile2000;
+            } else if (ground[2] == 3000) {
+              profile = horseProfile3000;
+            }
+            for (let i = 0; i < 9; i++) {
+              let base = getBaseSpeed(profile[i], index);
+              if (i == 1) {
+                if (nearHorse("horse2", 5).length) {
+                  base -= 0.2;
+                } else if (nearHorse("horse2", 7).length) {
+                  base -= 0.1;
+                }
+              } else if (i == 3) {
+                if (profile[i][1].from <= index) {
+                  if (
+                    (ratios[i] == 1.1 && [0, 1, 2, 3].includes(Math.floor(Math.random() * 5))) ||
+                    (ratios[i] == 1 && Math.floor(Math.random() * 2) == 0) ||
+                    (ratios[i] == 0.9 && Math.floor(Math.random() * 5) == 0)
+                  ) {
+                    base += 0.2;
+                  }
+                }
+              } else if (i == 6) {
+                if (["normal", "bad"].includes(ground[1])) {
+                  base += 0.2;
+                }
+              } else if (i == 7) {
+                if (ground[0] == "dirt") {
+                  base += 0.2;
+                }
+              } else if (i == 8) {
+                if (
+                  (ratios[i] == 1.1 && [0, 1, 2, 3].includes(Math.floor(Math.random() * 5))) ||
+                  (ratios[i] == 1 && Math.floor(Math.random() * 2) == 0) ||
+                  (ratios[i] == 0.9 && Math.floor(Math.random() * 5) == 0)
+                ) {
+                  base += 0.2;
+                }
+              }
+              base *= ratios[i];
+              moveHorse(`horse${i + 1}`, base, 0);
+              if (horses[`horse${i + 1}`].x >= 660) {
+                goalHorse.push(i + 1);
+              }
+            }
+            index += 1;
+            if (goalHorse.length >= 5)) {
+              clearInterval(race);
+              afterRace();
+            }
+          }, 50);
+        };
+      }
+      replay();
+    </script>
+  </body>
+</html>
