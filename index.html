@@ -42,10 +42,18 @@
         position: relative;
         width: 700px;
         height: 360px;
+        overflow: hidden
         border: 1px solid black;
       }
       .item {
         position: absolute;
+      }
+      .goal {
+        display: grid;
+        grid-template-columns: 400px;
+        grid-template-rows: 30px;
+        font-size: 20px;
+        border: 1px solid black;
       }
       .betTable {
         display: grid;
@@ -163,6 +171,7 @@
         <div id="money">1000</div>
         <button class="startButton">START</button>
       </div>
+      <div class="goal"></div>
       <div class="betTable" id="betTable">
         <div>種類</div>
         <div>馬</div>
@@ -224,6 +233,7 @@
     </div>
     <script>
       function replay() {
+        document.querySelector(".goal").style.display = "none";
         const horse1 = document.getElementById("horse1");
         const horse2 = document.getElementById("horse2");
         const horse3 = document.getElementById("horse3");
@@ -461,6 +471,7 @@
             return randSpeed(p.min, p.max);
           }
           let index = 1;
+          const goalHorse = [];
           let race = setInterval(() => {
             const speeds = Array(9).fill(0);
             let profile;
@@ -508,13 +519,19 @@
               }
               base *= ratios[i];
               moveHorse(`horse${i + 1}`, base, 0);
+              if (horses[i] >= 660) {
+                goal.push(i);
+              }
             }
-            index += 1
+            index += 1;
             if (Object.values(horses).every(h => h.x >= 660)) {
               clearInterval(race);
             }
           }, 50);
         };
+        document.querySelector(".track").style.display = "none";
+        document.querySelector(".goal").style.display = "block";
+        document.querySelector(".goal").textContent = `一着：${goal[0]}、二着：${goal[1]}、三着：${goal[2]}`;
       }
       replay();
     </script>
