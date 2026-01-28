@@ -340,6 +340,15 @@
               betTable.appendChild(clone);
             });
           }
+        } else {
+          document.querySelectorAll("input").forEach(input => {
+            input.value = input.defaultValue;
+          });
+          document.querySelectorAll("select").forEach(select => {
+            Array.from(select.options).forEach(opt => {
+              opt.selected = opt.defaultSelected;
+            });
+          });
         }
         const track = document.querySelector(".track");
         track.style.display = "none";
